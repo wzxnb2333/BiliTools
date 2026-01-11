@@ -201,6 +201,10 @@ const options = computed(() => ({
     icon: 'fa-video-slash',
     data: v.prov.audio?.length,
   },
+  danmaku: {
+    icon: 'fa-subtitles',
+    data: v.prov.danmaku?.length,
+  },
 }));
 
 defineExpose({ getSelect });
@@ -284,6 +288,7 @@ async function getSelect(item: Types.MediaItem, select?: Types.PopupSelect) {
         video: false,
         audio: false,
         audioVideo: true,
+        danmaku: false,
       },
     });
   }
@@ -343,6 +348,16 @@ function click(key: keyof typeof extras.value | 'media', id: string) {
   }
   if (key === 'misc' && id === 'subtitles') {
     return (v.select.misc[id] = v.select.misc[id] ? false : v.subtitle);
+  }
+  if (key === 'media' && id === 'danmaku') {
+    v.select.media.danmaku = !v.select.media.danmaku;
+    if (v.select.media.danmaku) {
+      const hasSelection = v.select.danmaku.live || v.select.danmaku.history;
+      if (!hasSelection && v.prov.danmaku.includes('live')) {
+        v.select.danmaku.live = true;
+      }
+    }
+    return;
   }
   const k = v.select[key] as Record<string, boolean>;
   k[id] = !k[id];

@@ -56,6 +56,7 @@ export interface PopupSelect {
     video: boolean;
     audio: boolean;
     audioVideo: boolean;
+    danmaku?: boolean;
   };
 }
 

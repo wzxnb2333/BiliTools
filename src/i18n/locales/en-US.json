@@ -79,7 +79,8 @@
     "mediaType": {
       "video": "Video",
       "audio": "Audio",
-      "audioVideo": "Video & Audio"
+      "audioVideo": "Video & Audio",
+      "danmaku": "Danmaku"
     }
   },
   "format": {

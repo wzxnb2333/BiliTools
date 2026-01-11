@@ -432,7 +432,12 @@ export function selectToSubTasks(id: string, select: Types.PopupSelect) {
   if (select.media.audio || select.media.audioVideo) push(Types.TaskType.Audio);
   if (select.media.audioVideo) push(Types.TaskType.AudioVideo);
   if (select.thumb.length) push(Types.TaskType.Thumb);
-  if (select.danmaku.live) push(Types.TaskType.LiveDanmaku);
+  if (
+    select.danmaku.live ||
+    (select.media.danmaku && !select.danmaku.history)
+  ) {
+    push(Types.TaskType.LiveDanmaku);
+  }
   if (select.danmaku.history) push(Types.TaskType.HistoryDanmaku);
   if (select.nfo.album) push(Types.TaskType.AlbumNfo);
   if (select.nfo.single) push(Types.TaskType.SingleNfo);
